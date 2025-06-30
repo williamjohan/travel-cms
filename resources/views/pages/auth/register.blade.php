@@ -14,32 +14,78 @@
     </div>
 
     <div class="card-body">
-        <form method="POST">
+        <form method="POST" action="{{ route('register')}}">
+            @csrf
             <div class="form-group">
                 <label for="frist_name">Name</label>
-                <input id="frist_name" type="text" class="form-control" name="frist_name" autofocus>
+                <input id="frist_name" type="text" class="form-control @error('name') is-invalid @enderror" name="name"
+                    autofocus>
+                @error('name')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+                @enderror
             </div>
 
             <div class="form-group">
                 <label for="email">Email</label>
-                <input id="email" type="email" class="form-control" name="email">
+                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email">
+                @error('email')
                 <div class="invalid-feedback">
+                    {{ $message }}
                 </div>
+                @enderror
             </div>
 
             <div class="form-group">
                 <label for="password" class="d-block">Password</label>
-                <input id="password" type="password" class="form-control pwstrength" data-indicator="pwindicator"
-                    name="password">
+
+                <div class="input-group">
+                    <input id="password" type="password"
+                        class="form-control pwstrength @error('password') is-invalid @enderror"
+                        data-indicator="pwindicator" name="password">
+                    <div class="input-group-append">
+                        <span class="input-group-text" onclick="togglePassword()" style="cursor: pointer;">
+                            <i class="fa fa-eye" id="eye-icon"></i>
+                        </span>
+                    </div>
+
+                    @error('password')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                    @enderror
+                </div>
+
+
+
                 <div id="pwindicator" class="pwindicator">
                     <div class="bar"></div>
                     <div class="label"></div>
                 </div>
             </div>
+
             <div class="form-group">
                 <label for="password2" class="d-block">Password Confirmation</label>
-                <input id="password2" type="password" class="form-control" name="password-confirm">
+                <div class="input-group">
+                    <input id="password2" type="password"
+                        class="form-control @error('password_confirmation') is-invalid @enderror"
+                        name="password_confirmation">
+
+                    <div class="input-group-append">
+                        <span class="input-group-text" onclick="toggleConfirmPassword()" style="cursor: pointer;">
+                            <i class="fa fa-eye" id="confirm-eye-icon"></i>
+                        </span>
+                    </div>
+
+                </div>
+
             </div>
+            @error('password-confirmation')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
 
             <div class="form-group">
                 <div class="custom-control custom-checkbox">
@@ -65,4 +111,39 @@
 
 <!-- Page Specific JS File -->
 <script src="{{ asset('js/page/auth-register.js') }}"></script>
+
+
+<!-- Toggle Show/Hide Password -->
+<script>
+    function togglePassword() {
+        const input = document.getElementById('password');
+        const icon = document.getElementById('eye-icon');
+
+        if (input.type === "password") {
+            input.type = "text";
+            icon.classList.remove("fa-eye");
+            icon.classList.add("fa-eye-slash");
+        } else {
+            input.type = "password";
+            icon.classList.remove("fa-eye-slash");
+            icon.classList.add("fa-eye");
+        }
+    }
+
+     function toggleConfirmPassword() {
+        const input = document.getElementById('password2');
+        const icon = document.getElementById('confirm-eye-icon');
+
+        if (input.type === "password") {
+            input.type = "text";
+            icon.classList.remove("fa-eye");
+            icon.classList.add("fa-eye-slash");
+        } else {
+            input.type = "password";
+            icon.classList.remove("fa-eye-slash");
+            icon.classList.add("fa-eye");
+        }
+    }
+</script>
+
 @endpush

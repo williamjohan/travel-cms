@@ -20,8 +20,8 @@ class UserSeeder extends Seeder
         //static generate data
         User::create(
             [
-                'name' => 'Admin  Johan',
-                'email' => 'a@b.cf',
+                'name' => 'Admin Johan',
+                'email' => 'william@example.com',
                 'password' => Hash::make('12345678'),
                 'roles' => 'admin',
                 'phone' => '08123456789',

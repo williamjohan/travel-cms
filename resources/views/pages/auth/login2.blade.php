@@ -32,25 +32,33 @@
                         </h4>
                         <p class="text-muted">Before you get started, you must login or register if you don't already
                             have an account.</p>
-                        <form method="POST" action="#" class="needs-validation" novalidate="">
+                        <form method="POST" action="{{route('login')}}" class="needs-validation" novalidate="">
+                            @csrf
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input id="email" type="email" class="form-control" name="email" tabindex="1" required
+                                <input id="email" type="email"
+                                    class="form-control @error('email')  is-invalid @enderror" name="email" tabindex="1"
                                     autofocus>
+                                @error('email')
                                 <div class="invalid-feedback">
-                                    Please fill in your email
+                                    {{ $message }}
                                 </div>
+                                @enderror
+
                             </div>
 
                             <div class="form-group">
                                 <div class="d-block">
                                     <label for="password" class="control-label">Password</label>
                                 </div>
-                                <input id="password" type="password" class="form-control" name="password" tabindex="2"
-                                    required>
+                                <input id="password" type="password"
+                                    class="form-control @error ('password') is-invalid @enderror" name="password"
+                                    tabindex="2">
+                                @error('password')
                                 <div class="invalid-feedback">
-                                    please fill in your password
+                                    {{ $message }}
                                 </div>
+                                @enderror
                             </div>
 
                             <div class="form-group text-right">
