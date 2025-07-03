@@ -21,6 +21,12 @@
 </head>
 
 <body>
+    @if (session('success'))
+    <div class="alert alert-success mb-3 rounded-0">
+        {{ session('success') }}
+    </div>
+    @endif
+
     <div id="app">
         <section class="section">
             <div class="d-flex align-items-stretch flex-wrap">

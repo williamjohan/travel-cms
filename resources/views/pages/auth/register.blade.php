@@ -88,10 +88,15 @@
             @enderror
 
             <div class="form-group">
-                <div class="custom-control custom-checkbox">
-                    <input type="checkbox" name="agree" class="custom-control-input" id="agree">
-                    <label class="custom-control-label" for="agree">I agree with the terms and conditions</label>
+                <div class="custom-control custom-checkbox @error ('terms') is-invalid @enderror">
+                    <input type="checkbox" name="terms" class="custom-control-input" id="terms">
+                    <label class="custom-control-label" for="terms">I agree with the terms and conditions</label>
                 </div>
+                @error('terms')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+                @enderror
             </div>
 
             <div class="form-group">
